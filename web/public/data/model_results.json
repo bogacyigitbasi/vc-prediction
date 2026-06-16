@@ -1,0 +1,90 @@
+{
+  "models": [
+    {
+      "name": "XGBoost (baseline)",
+      "shortName": "XGBoost",
+      "type": "tabular",
+      "f1": 0.5577,
+      "roc_auc": 0.7114,
+      "precision": 0.5956,
+      "recall": 0.5244,
+      "accuracy": 0.6666,
+      "description": "Gradient-boosted decision trees on tabular company features only. No graph structure. The gold standard baseline for structured data.",
+      "color": "#3498db"
+    },
+    {
+      "name": "GCN (GraphConv)",
+      "shortName": "GCN",
+      "type": "gnn",
+      "f1": 0.5435,
+      "roc_auc": 0.6113,
+      "precision": 0.4522,
+      "recall": 0.681,
+      "accuracy": 0.5413,
+      "description": "Graph Convolutional Network with symmetric aggregation. Failed to train stably on bipartite graph \u2014 loss spikes and degenerate predictions due to learning rate sensitivity.",
+      "color": "#e74c3c"
+    },
+    {
+      "name": "GraphSAGE v2",
+      "shortName": "GraphSAGE",
+      "type": "gnn",
+      "f1": 0.6277,
+      "roc_auc": 0.7406,
+      "precision": 0.5115,
+      "recall": 0.8122,
+      "accuracy": 0.6138,
+      "description": "Sample-and-aggregate GNN with mean aggregation. Best single model. Inductive by design \u2014 handles unseen nodes and sparse bipartite structure robustly.",
+      "color": "#2ecc71"
+    },
+    {
+      "name": "GAT (4 heads)",
+      "shortName": "GAT",
+      "type": "gnn",
+      "f1": 0.5648,
+      "roc_auc": 0.6581,
+      "precision": 0.5194,
+      "recall": 0.6189,
+      "accuracy": 0.6176,
+      "description": "Graph Attention Network with 4 attention heads. Attention mechanism needs more data/edges to learn which neighbors matter. Below XGBoost baseline.",
+      "color": "#f39c12"
+    },
+    {
+      "name": "Ensemble (XGB + GraphSAGE)",
+      "shortName": "Ensemble",
+      "type": "ensemble",
+      "f1": 0.6377,
+      "roc_auc": 0.7448,
+      "precision": 0.516,
+      "recall": 0.8347,
+      "accuracy": null,
+      "description": "Weighted average of XGBoost and GraphSAGE v2. Combines complementary signals: tabular features + graph structure. Best overall F1 and recall.",
+      "color": "#9b59b6"
+    }
+  ],
+  "improvementJourney": [
+    {
+      "step": "XGBoost baseline",
+      "f1": 0.558,
+      "auc": 0.711,
+      "delta": null
+    },
+    {
+      "step": "+ Graph (SAGEv1)",
+      "f1": 0.625,
+      "auc": 0.737,
+      "delta": "+12.0%"
+    },
+    {
+      "step": "+ Text + Weights",
+      "f1": 0.628,
+      "auc": 0.741,
+      "delta": "+0.5%"
+    },
+    {
+      "step": "+ Ensemble",
+      "f1": 0.638,
+      "auc": 0.745,
+      "delta": "+1.6%"
+    }
+  ]
+}

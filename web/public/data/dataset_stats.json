@@ -1,0 +1,27 @@
+{
+  "totalCompanies": 66369,
+  "totalInvestors": 30732,
+  "totalEdges": {
+    "train": 73509,
+    "val": 91573,
+    "test": 115564
+  },
+  "labeledCompanies": 23740,
+  "positiveRate": 0.391,
+  "splits": {
+    "train": {
+      "count": 12920,
+      "positiveRate": 0.383
+    },
+    "val": {
+      "count": 4831,
+      "positiveRate": 0.403
+    },
+    "test": {
+      "count": 5989,
+      "positiveRate": 0.401
+    }
+  },
+  "companyFeatureDims": 58,
+  "investorFeatureDims": 7
+}

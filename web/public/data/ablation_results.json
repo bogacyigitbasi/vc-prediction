@@ -1,0 +1,39 @@
+{
+  "ablations": [
+    {
+      "name": "Full Model (GraphSAGE v2)",
+      "setting": "All features + temporal edges",
+      "f1": 0.6277,
+      "roc_auc": 0.7406,
+      "whatsRemoved": "Nothing (baseline)"
+    },
+    {
+      "name": "Topology-Only",
+      "setting": "Random features",
+      "f1": 0.5723,
+      "roc_auc": 0.5442,
+      "whatsRemoved": "All node features replaced with random vectors"
+    },
+    {
+      "name": "No Temporal Filter",
+      "setting": "Leaked future edges",
+      "f1": 0.6202,
+      "roc_auc": 0.7302,
+      "whatsRemoved": "Temporal edge filtering removed"
+    },
+    {
+      "name": "XGBoost (no graph)",
+      "setting": "Tabular only",
+      "f1": 0.5577,
+      "roc_auc": 0.7114,
+      "whatsRemoved": "All graph structure removed"
+    }
+  ],
+  "insights": [
+    "Node features are the primary signal source \u2014 AUC drops 20 percentage points without them (0.74 \u2192 0.54)",
+    "Graph structure provides a complementary +3pp AUC boost over tabular-only (0.71 \u2192 0.74)",
+    "Temporal edge filtering is methodologically sound but doesn't inflate results \u2014 the VC network is structurally stable 2012-2014",
+    "Graph topology alone (random features) is barely above random chance (AUC = 0.54)",
+    "The combination of features + graph is greater than either alone"
+  ]
+}
